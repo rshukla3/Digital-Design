@@ -29,6 +29,8 @@ module Mask_Logic #(
 		output reg [width-1:0] mask_generated
 	 );
 
+	
+	
 	always @(posedge clk)
 	begin
 		if(!rst_n)

@@ -27,7 +27,7 @@ module Round_Robin_Arbiter #
 	input rst_n,
 	input [width-1:0] request,
 	
-	output reg [width-1:0] grant
+	output [width-1:0] grant
  );
 
 	wire [width-1:0] masked_request;
@@ -52,7 +52,9 @@ module Round_Robin_Arbiter #
 	Unmasked_Priority_Arbiter #(width)
 	UMPA(.unmasked_request(unmasked_request),
 			.unmasked_grant(unmasked_grant));
-		
 	
+	assign masked_request = mask_generated && request;
+	assign unmasked_request = request;
+	assign grant = ((mask_generated && request) == 0) ? unmasked_grant : masked_grant;
 	
 endmodule
